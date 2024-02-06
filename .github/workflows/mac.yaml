@@ -1,0 +1,42 @@
+name: mac-test
+
+on:
+  push:
+
+jobs:
+  test:
+    name: test integration mac runners
+    runs-on: "${{ matrix.os }}"
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-11
+            target_os: dawin
+            target_arch: amd64
+          - os: macos-12
+            target_os: darwin
+            target_arch: amd64
+          - os: macos-13
+            target_os: darwin
+            target_arch: amd64
+          - os: macos-14 # M1 ARM
+            target_os: darwin
+            target_arch: arm64
+    env:
+      GOOS: "${{ matrix.target_os }}"
+      GOARCH: "${{ matrix.target_arch }}"
+      GOPROXY: "https://proxy.golang.org"
+      TEST_OUTPUT_FILE_PREFIX: "test_report"
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v4
+      - name: Set up Go
+        id: setup-go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: "go.mod"
+      - name: Build binaries
+        run: make build
+      - name: Run make test-integration
+        run: make test-integration
