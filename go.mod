@@ -458,7 +458,7 @@ replace (
 
 // the following lines are necessary to update to commits with proper licenses
 replace (
-	github.com/chenzhuoyu/iasm => github.com/chenzhuoyu/iasm v0.9.0
+	github.com/chenzhuoyu/iasm => github.com/chenzhuoyu/iasm v0.9.1
 	github.com/chzyer/logex => github.com/chzyer/logex v1.2.1
 	github.com/gobwas/pool => github.com/gobwas/pool v0.2.1
 	github.com/toolkits/concurrent => github.com/niean/gotools v0.0.0-20151221085310-ff3f51fc5c60
